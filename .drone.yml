@@ -1,0 +1,33 @@
+# global-variables:
+#   debian_image: &debian_image debian:7.11-slim
+#   environment: &default_environment
+#     SNYK_VARIABLE: 12ef4322-feaa-4527-8642-d562d96bdd92
+
+kind: pipeline
+name: default
+git int
+steps:
+- name: scan
+  image: plugins/drone-snyk
+  pull: if-not-exists
+  # commands:
+  #   - set
+  privileged: true
+  settings:
+    image: fasstech/com-tailwind:latest
+  #   username: ${DOCKER_USERNAME}
+  #   password: ${DOCKER_PASSWORD}
+    snyk:
+      from_secret: snyk
+  debug: true
+# image_pull_secrets:
+# - dockerconfigjson
+
+# - name: clair
+#   image: jmccann/drone-clair:1
+#   settings:
+#     username:
+#       from_secret: username
+#     password:
+#       from_secret: password
+#     scan_image: python:2.7
