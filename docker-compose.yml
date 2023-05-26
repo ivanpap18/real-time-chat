@@ -4,8 +4,8 @@ services:
     build:
       context: ./
     command: node index.js
-    volume:
-      - /var/run/docker.sock:/var/run/docker.sock
+#     volume:
+#       - /var/run/docker.sock:/var/run/docker.sock
     ports:
       - "3700:3700"
     # for debugging
